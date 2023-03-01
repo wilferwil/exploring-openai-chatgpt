@@ -1,3 +1,5 @@
+#! ./.venv/bin/python3
+
 import datetime
 from googleapiclient.discovery import build
 from httplib2 import Http
@@ -27,6 +29,10 @@ query = 'after:{} before:{}'.format(day_start, day_end)
 
 results = service.users().messages().list(userId='me', q=query).execute()
 
+if not results.get('resultSizeEstimate'):
+    print('No messages yesterday.')
+    exit()
+print('Total mail messages: ' + str(results['resultSizeEstimate']))
 for message in results['messages']:
     msg = service.users().messages().get(userId='me', id=message['id']).execute()
     print('Message snippet: {}'.format(msg['snippet']))

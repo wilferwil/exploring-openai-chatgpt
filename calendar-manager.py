@@ -1,3 +1,5 @@
+#! ./.venv/bin/python3
+
 from __future__ import print_function
 import datetime
 from googleapiclient.discovery import build
@@ -24,6 +26,7 @@ events = events_result.get('items', [])
 
 if not events:
     print('No events this month.')
+    exit()
 for event in events:
     start = event['start'].get('dateTime', event['start'].get('date'))
     print(start, event['summary'])
