@@ -1,9 +1,12 @@
+#! ./.venv/bin/python3
+
 import openai
 import os
 import sys
 
 # Set up OpenAI API credentials
 openai.api_key = os.environ["OPENAI_API_KEY"]
+ask_loop = False
 
 # Define a function to ask questions to ChatGPT
 def ask_chat_gpt(prompt):
@@ -21,7 +24,11 @@ def ask_chat_gpt(prompt):
     answer = response.choices[0].text.strip()
     return answer
 
-if len(sys.argv) > 1:
+if "loop" in sys.argv:
+    ask_loop = True
+elif "stdin" in sys.argv:
+    prompt = sys.stdin.read()
+elif len(sys.argv) > 1:
     prompt = sys.argv[1]
 else:
     prompt = input("Ask me anything: ")

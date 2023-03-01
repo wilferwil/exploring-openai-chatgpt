@@ -1,0 +1,5 @@
+Highlight the relevant information in the data below:
+
+Blue is a color
+Microsoft's stock price went up 10% today
+Grape is a fruit
